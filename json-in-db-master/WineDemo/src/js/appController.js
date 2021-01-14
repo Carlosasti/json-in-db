@@ -25,7 +25,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         'table':        {label: 'Table', isDefault: true},
         'modify/{key}': {label: 'Modify', value: 'modify'},
         'add':          {label: 'Add',    value: 'add'},
-        'discount':     {label: 'Discount',    value: 'discount'},
         'about':        {label: 'About',  value: 'about'}
       });
       self.serviceURL = "/wines"; //http://localhost:3001
@@ -135,7 +134,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
       var navData = [
         {name: 'Inventory', id: 'table'},
         {name: 'Add Wine',  id: 'add'},
-       {name: 'Discount',     id: 'discount'},
         {name: 'About',     id: 'about'}
       ];
       self.navDataSource = new oj.ArrayTableDataSource(navData, {idAttribute: 'id'});
@@ -173,7 +171,8 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
         new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html'),
         new footerLink('Reset Demo', 'resetDemo', '/wines-reset'),
-        new footerLink('Discount', 'discount', '/discount')
+        new footerLink('Discount', 'discount', '/discount'),
+        new footerLink('Best Spanish wines ', 'exists', '/exists')
       ]);
      }
 

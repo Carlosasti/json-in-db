@@ -47,13 +47,44 @@ async function update(id, review) {
 }
 
 async function discount() {
-      console.log("discountWINES_ORACLE");
+     
   var conn = await oracledb.getConnection();
   var collection = await getCollection(conn);
    let sql = `  UPDATE wines w SET w.json_document = json_transform(w.json_document, SET '$.price' = w.json_document.price.number()*0.7 ) WHERE w.json_document.price.number() > 10`;//`UPDATE wines w SET w.json_document = json_mergepatch(w.json_document, '{"price":5}') WHERE w.json_document.price.number() > 10`;
  const result= await conn.execute(sql);
     conn.close();
   return result;
+}
+
+async function exists() {
+
+var conn = await oracledb.getConnection();
+var collection = await getCollection(conn);
+let sql = `  
+SELECT JSON_QUERY(json_document,
+  ' $.name' 
+  with wrapper) 
+FROM  wines w
+WHERE JSON_EXISTS( json_document,
+  ' $.region?(@.country like "%Spain%")' ) AND  JSON_EXISTS( json_document,
+  '$.notes[*]?(@.rate > 4.5) ')
+`;
+const result= await conn.execute(sql);
+if (result.rows.length) {
+  var i=1;
+  console.log('Rate > 4.5 and From Spain');
+  while(i<result.rows.length  ){
+    js = JSON.parse(result.rows[i]);
+  console.log('The name is: ' + js);
+    i++;
+  }
+
+} else {
+  console.log('No rows fetched');
+}
+
+conn.close();
+return result;
 }
 
 
@@ -105,6 +136,7 @@ module.exports.close = close;
 module.exports.get = get;
 module.exports.update = update;
 module.exports.discount = discount;
+module.exports.exists = exists;
 module.exports.create = create;
 module.exports.remove = remove;
 module.exports.code = code;

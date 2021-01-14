@@ -115,7 +115,7 @@ app.get('/discount', async function (request, response)
      
   try
   {
-    console.log("discount_SERVER");
+ 
     await db.discount();
      response.redirect('/')
         
@@ -126,6 +126,21 @@ app.get('/discount', async function (request, response)
   }
 });
 
+app.get('/exists', async function (request, response)  
+{
+     
+  try
+  {
+
+    await db.exists();
+     response.redirect('/')
+        
+  }
+  catch (err)
+  {
+    handle(err, response);
+  }
+});
 
 function handle(err, response) {
    response.send({"error": err.message});

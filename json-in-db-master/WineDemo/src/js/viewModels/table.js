@@ -16,6 +16,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojkn
       self.root = self.router.root;
       /* Defines the columns of the reviews table */
       self.columnArray = [
+        
         {
           headerText: 'Name',
           field: 'name'
@@ -30,22 +31,11 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider', 'ojs/ojkn
         },
         {
           headerText: 'Country',
-          field: 'region'
+          field: 'region.country'
         },
-
         {
           headerText: 'DO',
-          field: 'origen'
-        },
-
-        {
-          headerText: 'Notes',
-          field: 'notes',
-          width: 150
-        },
-        {
-          headerText: 'Prediction',
-          field: 'prediction'
+          field: 'do'
         },
         {
           headerText: '',
